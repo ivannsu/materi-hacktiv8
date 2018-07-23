@@ -1,5 +1,18 @@
-function deepSum (arr) {
-  // Code disini
+function deepSum(arr) {
+  if(arr.length === 0) return 'No number'
+
+  let result = 0
+  for(let i = 0; i < arr.length; i++) {
+    // console.log(arr[i])
+    for(let j = 0; j < arr[i].length; j++) {
+      // console.log(arr[i][j]) // [ 4, 5, 6 ] [ 9, 1, 2, 10 ] and etc..
+      for(let k = 0; k < arr[i][j].length; k++) {
+        // console.log(arr[i][j][k])
+        result += arr[i][j][k]
+      }
+    }
+  }
+  return result
 }
 //TEST CASE
 console.log(deepSum([
