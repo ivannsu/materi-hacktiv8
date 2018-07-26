@@ -68,7 +68,7 @@ function filterVoters(input){
     filterArr[input[i].firstName] = filterArr[input[i].firstName] + 1 || 1;
   }
   /**
-   * console.log(filterArr); -- temporary output on line 60
+   * console.log(filterArr); -- temporary output on line 68
    * 
    * [ Ihsan: 2, Neil: 1, Ihan: 2, Isan: 1 ]
    */
@@ -86,30 +86,23 @@ function filterVoters(input){
        * 
        * key: Neil, value: 1
        */
-      resultKeys.valid.push(i);
-    } else {
-      resultKeys.invalid.push(i);
-    }
-  }
-  /**
-   * console.log(resultKeys); -- temporary output on line 85 and 87
-   * 
-   * { valid: [ 'Neil', 'Isan' ], invalid: [ 'Ihsan', 'Ihan' ] }
-   */
-  for(let i = 0; i < resultKeys.valid.length; i++) {
-    /**
-     * console.log(resultKeys.valid[i]);
-     * 
-     * Neil 
-     * Isan
-     */
-    for(let j = 0; j < input.length; j++) {
-      if(input[j].firstName === resultKeys.valid[i]) {
-        results.valid_voters.push(input[j]);
+      for(let j = 0; j < input.length; j++) {
+        if(input[j].firstName === i) results.valid_voters.push(input[j]);
       }
+    } else {
+      let tempArr = [];
+      for(let j = 0; j < input.length; j++) {
+        if(input[j].firstName === i) {
+          tempArr.push(input[j]);
+        }
+      }
+      resultKeys.invalid.push(tempArr);
     }
   }
-  console.log(results);
+  for(let i = 0; i < resultKeys.invalid.length; i++) {
+    results.invalid_voters.push(resultKeys.invalid[i][0])
+  }
+  return results;
 }
 
 console.log(filterVoters([{
