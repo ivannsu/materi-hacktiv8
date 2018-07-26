@@ -41,7 +41,15 @@
    } */
 
 function filterVoters(input){
-  let filterInputArr = [];
+  let filterArr = [];
+  let resultKeys = {
+    valid: [],
+    invalid: []
+  };
+  let results = {
+    valid_voters: [],
+    invalid_voters: []
+  };
 
   for(let i = 0; i < input.length; i++) {
     /**
@@ -49,24 +57,59 @@ function filterVoters(input){
      * 
      * { firstName: 'Ihsan', lastName: 'Maulana', age: 23 }
      * { firstName: 'Neil', lastName: 'Tanodo', age: 23 }
+     * 
+     * console.log(input[i].firstName);
+     * 
+     * Ihsan
+     * Neil
+     * Ihsan
+     * Ihan
      */
-    console.log(input[i].firstName);
-    // for(let j in input[i]) {
-      /**
-       * console.log('key: ' + j + ' value: ' + input[i][j]);
-       * 
-       * key: firstName, value: Ihsan
-       * key: lastName, value: Maulana
-       * key: age, value: 23
-       */
-      // filterInputArr[input[i].firstName] = filterInputArr[input[i].firstName] + 1 || 1
-    // }
+    filterArr[input[i].firstName] = filterArr[input[i].firstName] + 1 || 1;
   }
   /**
-   * console.log(filterInputArr); line ==> 61
+   * console.log(filterArr); -- temporary output on line 60
    * 
-   * [ Ihsan: 6, Neil: 3, Ihan: 6, Isan: 3 ]
+   * [ Ihsan: 2, Neil: 1, Ihan: 2, Isan: 1 ]
    */
+  for(let i in filterArr) {
+    /**
+     * console.log('key: ' + i + ', value: ' + filterArr[i]);
+     * 
+     * key: Ihsan, value: 2
+     * key: Neil, value: 1
+     * ...
+     */
+    if(parseInt(filterArr[i]) === 1) {
+      /**
+       * console.log('key: ' + i + ', value: ' + filterArr[i]);
+       * 
+       * key: Neil, value: 1
+       */
+      resultKeys.valid.push(i);
+    } else {
+      resultKeys.invalid.push(i);
+    }
+  }
+  /**
+   * console.log(resultKeys); -- temporary output on line 85 and 87
+   * 
+   * { valid: [ 'Neil', 'Isan' ], invalid: [ 'Ihsan', 'Ihan' ] }
+   */
+  for(let i = 0; i < resultKeys.valid.length; i++) {
+    /**
+     * console.log(resultKeys.valid[i]);
+     * 
+     * Neil 
+     * Isan
+     */
+    for(let j = 0; j < input.length; j++) {
+      if(input[j].firstName === resultKeys.valid[i]) {
+        results.valid_voters.push(input[j]);
+      }
+    }
+  }
+  console.log(results);
 }
 
 console.log(filterVoters([{
