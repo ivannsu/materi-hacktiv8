@@ -1,7 +1,7 @@
 function cariPelaku(str) {
   // return str.match(/abc/g).length;
   let regex = new RegExp(/abc/, 'g');
-  return str.match(regex);
+  return str.match(regex).length;
 }
 // TEST CASES
 console.log(cariPelaku('mabcvabc')); // 2
