@@ -13,12 +13,22 @@ RULES
 
 */
 
-function angkaTerbesar(arr) {
-  if(arr.length === 0) return -1;
+function angkaTerbesar(sentence) {
+  let tmp = 0;
+
+  if(sentence.length === 0) return -1;
+  if(sentence.length === 1) return sentence[0];
+  if(sentence[0] > sentence[1]) {
+    tmp = sentence[1];
+    sentence[1] = sentence[0];
+    sentence[0] = tmp;
+  }
+  console.log(sentence);
+  return angkaTerbesar(sentence.slice(1, sentence.length - 1));
 }
 
 // TEST CASES
 // console.log(angkaTerbesar([2, 3, 7, 6, 5])) // 7
-// console.log(angkaTerbesar([9, 3, 7, 4, 1])) // 9
+console.log(angkaTerbesar([9, 3, 7, 4, 1])) // 9
 // console.log(angkaTerbesar([2, 1, 7, 2, 8])) // 7
-console.log(angkaTerbesar([])) // -1
+// console.log(angkaTerbesar([])) // -1
